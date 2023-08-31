@@ -1,0 +1,57 @@
+<html>
+<head>
+  <meta charset="utf-8"> 
+  <title>웹게임</title>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+  class GuGuDan extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            first : Math.ceil(Math.random()*9),
+            second : Math.ceil(Math.random()*9),
+            value : '',
+            result : ''
+        }
+    }
+
+    onSubmit = (e) => {
+      e.preventDefault();
+      if(parseInt(this.state.value) === this.state.first * this.state.second) {
+        this.setState(() => {
+          
+        })
+      }
+    }
+
+    onChange = (e) => {
+      this.setState({
+        value: e.target.value
+      })
+    }
+
+    render(){
+        return (
+          <div>
+            <div>{this.state.first} 곱하기 {this.state.second} 은 ?</div>
+            <form onSubmit={this.onSubmit}>
+              <input type="number" value={this.state.value} onChange={this.onChange}/>
+              <button>입력!</button>
+            </form>
+            <div>{this.state.result}</div>
+          </div>
+        );
+    }
+  }
+</script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan/>);
+</script> 
+</body>
+</html>

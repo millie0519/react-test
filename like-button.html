@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta charset="utf-8"> 
+  <title>웹게임</title>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+  'use strict';
+
+  class LikeButton extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {liked: false};
+    }
+
+    render() {
+      if (this.state.liked) {
+        return 'You liked this.';
+      }
+
+      return (
+        <button onClick={() => this.setState({liked: true})}>
+          Like
+        </button>
+      );
+    }
+  }
+</script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.querySelector('#root')).render(<LikeButton/>);
+</script> 
+</body>
+</html>
