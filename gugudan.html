@@ -20,7 +20,8 @@
             result : ''
         }
     }
-
+    
+    //직접 생성한 함수는 화살표 함수 필수, function 안됨 (this가 달라짐)
     onSubmit = (e) => {
       e.preventDefault(); //페이지 reload 방지
       if(parseInt(this.state.value) === this.state.first * this.state.second) {
@@ -50,17 +51,20 @@
       })
     }
 
+    input; //선언
+    //dom에 직접 접근하고 싶을때 ref 사용,  this.input을 통하여 접근 가능해짐
+
     render(){
-        return (
-          <div>
-            <div>{this.state.first} 곱하기 {this.state.second} 은 ?</div>
-            <form onSubmit={this.onSubmit}>
-              <input type="number" value={this.state.value} onChange={this.onChange}/>
-              <button>입력!</button>
-            </form>
-            <div>{this.state.result}</div>
-          </div>
-        );
+      return (
+        <div>
+          <div>{this.state.first} 곱하기 {this.state.second} 은 ?</div>
+          <form onSubmit={this.onSubmit}>              
+            <input ref={(c) => {this.input = c;}} type="number" value={this.state.value} onChange={this.onChange}/>
+            <button type="submit">입력!</button>
+          </form>
+          <div>{this.state.result}</div>
+        </div>
+      );
     }
   }
 </script>
