@@ -22,11 +22,25 @@
     }
 
     onSubmit = (e) => {
-      e.preventDefault();
+      e.preventDefault(); //페이지 reload 방지
       if(parseInt(this.state.value) === this.state.first * this.state.second) {
-        this.setState(() => {
-           
+        this.setState((prevState) => {
+           return {
+            result: '정답 : ' + prevState.value,
+            first : Math.ceil(Math.random()*9),
+            second : Math.ceil(Math.random()*9),
+            value: '',
+           }
         })
+        this.input.focus();
+      } else {
+        this.setState((prevState) => {
+          return {
+            result: prevState.value + ' : 땡',
+            value: '',
+          }
+        });
+        this.input.focus();
       }
     }
 
