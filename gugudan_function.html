@@ -1,0 +1,68 @@
+<html>
+<head>
+  <meta charset="utf-8"> 
+  <title>구구단</title>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+  'use strict';
+  
+  const GuGuDan = () => {
+    const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9)); //useState(초기값)
+    const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+    const [value, setValue] = React.useState('');
+    const [result, setResult] = React.useState('');
+    const inputEl = React.useRef(null);
+
+    // --
+    const [state, setState] = React.useState({
+      first2 : Math.ceil(Math.random()*9),
+      second2 : Math.ceil(Math.random()*9),
+      value2 : '',
+      result2 : ''
+    }); 
+    // state를 위와 같이 객체형으로 하나만 만드는 것도 가능하지만
+    // setState를 작동할때 일일히 같이 바꿔주어야 하기 때문에 사용하지 않는다
+
+    const onSubmitForm = (e) => {
+      e.preventDefault();
+      if (parseInt(value) === first * second) {
+        setResult('정답 ' + value);
+        setFirst(Math.ceil(Math.random() * 9));
+        setSecond(Math.ceil(Math.random() * 9));
+        setValue('');
+        inputEl.current.focus();
+      } else {
+        setResult('땡');
+        setValue('');
+        inputEl.current.focus();
+      }
+    };
+
+    return (
+      <React.Fragment>
+        <div>{first} 곱하기 {second}는?</div>
+        <form onSubmit={onSubmitForm}>
+          <input
+            ref={inputEl}
+            type="number"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button>입력!</button>
+        </form>
+        <div id="result">{result}</div>
+      </React.Fragment>
+    )
+  }
+</script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan/>);
+</script> 
+</body>
+</html>
